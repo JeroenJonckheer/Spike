@@ -1,0 +1,1782 @@
+{
+  "source": "LOLRMM (https://lolrmm.io), Apache License 2.0",
+  "tools": [
+    {
+      "name": "AnyDesk",
+      "originalFileNames": [
+        "AnyDesk.exe"
+      ],
+      "fileNames": [
+        "anydesk.exe"
+      ],
+      "products": [
+        "AnyDesk"
+      ],
+      "signers": [
+        "AnyDesk Software GmbH",
+        "philandro Software GmbH"
+      ],
+      "services": [
+        "AnyDesk Service",
+        "AnyDesk * Service"
+      ],
+      "paths": [
+        "C:\\Program Files (x86)\\AnyDesk\\*",
+        "C:\\Program Files (x86)\\AnyDesk\\AnyDesk.exe",
+        "C:\\Program Files\\AnyDesk\\*",
+        "C:\\Program Files (x86)\\AnyDesk-*\\*",
+        "C:\\Program Files (x86)\\AnyDesk-*\\AnyDesk-*.exe",
+        "C:\\Program Files\\AnyDesk-*\\AnyDesk-*.exe"
+      ],
+      "logs": [
+        "%programdata%\\AnyDesk\\ad_svc.trace",
+        "%programdata%\\AnyDesk\\connection_trace.txt",
+        "%APPDATA%\\AnyDesk\\connection_trace.txt",
+        "%APPDATA%\\AnyDesk\\ad.trace",
+        "*\\AppData\\Roaming\\AnyDesk\\file_transfer_trace.txt",
+        "*\\ProgramData\\AnyDesk\\file_transfer_trace.txt",
+        "%APPDATA%\\AnyDesk\\chat\\*.txt",
+        "%APPDATA%\\AnyDesk\\user.conf",
+        "%PROGRAMDATA%\\AnyDesk\\service.conf",
+        "%APPDATA%\\AnyDesk\\service.conf",
+        "%APPDATA%\\AnyDesk\\system.conf",
+        "%PROGRAMDATA%\\AnyDesk\\system.conf",
+        "*\\ProgramData\\AnyDesk\\ad_*\\ad_*_svc.trace",
+        "*\\AppData\\Roaming\\AnyDesk\\ad_*\\ad_*.trace",
+        "*\\AppData\\Roaming\\AnyDesk\\ad_*\\chat\\*.txt",
+        "*\\AppData\\Roaming\\AnyDesk\\ad_*\\user.conf",
+        "*\\AppData\\Roaming\\AnyDesk\\ad_*\\service.conf",
+        "*\\ProgramData\\AnyDesk\\ad_*\\service.conf",
+        "*\\ProgramData\\AnyDesk\\ad_*\\system.conf",
+        "%PROGRAMDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp\\AnyDesk.lnk",
+        "*\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp\\AnyDesk *.lnk",
+        "%PROGRAMDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\AnyDesk\\Uninstall AnyDesk.lnk",
+        "C:\\Users\\*\\Videos\\AnyDesk\\*.anydesk",
+        "C:\\Windows\\SysWOW64\\config\\systemprofile\\AppData\\Roaming\\AnyDesk\\*"
+      ],
+      "domains": [
+        "boot.net.anydesk.com",
+        "relay-*.net.anydesk.com",
+        "*.net.anydesk.com"
+      ],
+      "ports": [
+        443,
+        7070,
+        80,
+        6568
+      ]
+    },
+    {
+      "name": "TeamViewer",
+      "originalFileNames": [],
+      "fileNames": [
+        "TeamViewer.exe"
+      ],
+      "products": [
+        "TeamViewer"
+      ],
+      "signers": [
+        "TeamViewer Germany GmbH",
+        "TeamViewer GmbH"
+      ],
+      "services": [
+        "TeamViewer"
+      ],
+      "paths": [
+        "C:\\Program Files\\TeamViewer\\"
+      ],
+      "logs": [
+        "C:\\Users\\<username>\\AppData\\Local\\Temp\\TeamViewer\\TV15Install.log",
+        "TeamViewer\\d\\d_Logfile\\.log",
+        "C:\\Program Files\\TeamViewer\\Connections_incoming.txt",
+        "C:\\Program Files\\TeamViewer\\TVNetwork.log",
+        "%LOCALAPPDATA%\\Temp\\TeamViewer\\TV15Install.log",
+        "%APPDATA%\\\\TeamViewer\\\\TeamViewer\\d\\d_Logfile\\.log",
+        "%LOCALAPPDATA%\\TeamViewer\\Database\\tvchatfilecache.db",
+        "%LOCALAPPDATA%\\TeamViewer\\RemotePrinting\\tvprint.db",
+        "%PROGRAMDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\TeamViewer.lnk",
+        "C:\\Program Files*\\TeamViewer\\connections*.txt",
+        "C:\\Users\\*\\AppData\\Roaming\\TeamViewer\\MRU\\RemoteSupport\\*tvc"
+      ],
+      "domains": [
+        "*.teamviewer.com",
+        "router15.teamviewer.com",
+        "client.teamviewer.com",
+        "taf.teamviewer.com"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "Quick Assist",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [],
+      "services": [],
+      "paths": [
+        "C:\\Windows\\System32\\QuickAssist.exe"
+      ],
+      "logs": [
+        "C:\\Windows\\System32\\QuickAssist.exe"
+      ],
+      "domains": [
+        "*.support.services.microsoft.com"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "RustDesk",
+      "originalFileNames": [],
+      "fileNames": [
+        "rustdesk.exe"
+      ],
+      "products": [],
+      "signers": [
+        "PURSLANE"
+      ],
+      "services": [
+        "RustDesk"
+      ],
+      "paths": [
+        "C:\\Users\\*\\AppData\\Local\\rustdesk\\rustdesk.exe",
+        "C:\\Users\\*\\AppData\\Local\\rustdesk\\*",
+        "C:\\Program Files\\RustDesk",
+        "C:\\Program Files\\RustDesk\\RustDesk.exe"
+      ],
+      "logs": [
+        "C:\\Windows\\ServiceProfiles\\LocalService\\AppData\\Roaming\\RustDesk\\*",
+        "C:\\Windows\\ServiceProfiles\\LocalService\\AppData\\Roaming\\RustDesk\\config\\RustDesk2.toml",
+        "C:\\Users\\*\\AppData\\Roaming\\RustDesk\\config\\RustDesk.toml",
+        "C:\\Users\\*\\AppData\\Roaming\\RustDesk\\config\\RustDesk2.toml",
+        "C:\\Users\\*\\AppData\\Roaming\\RustDesk\\log\\*",
+        "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\RustDesk Tray.lnk"
+      ],
+      "domains": [
+        "rustdesk.com",
+        "user_managed",
+        "web.rustdesk.com",
+        "api.rustdesk.com",
+        "rs-ny.rustdesk.com"
+      ],
+      "ports": [
+        443,
+        21115,
+        21116,
+        21117,
+        21118,
+        21119
+      ]
+    },
+    {
+      "name": "UltraViewer",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "DUC FABULOUS CO.,LTD"
+      ],
+      "services": [],
+      "paths": [
+        "C:\\Program Files (x86)\\UltraViewer\\UltraViewer_Desktop.exe",
+        "*\\UltraViewer\\",
+        "*\\UltraViewer_Desktop.exe"
+      ],
+      "logs": [],
+      "domains": [
+        "*.ultraviewer.net",
+        "ultraviewer.net"
+      ],
+      "ports": []
+    },
+    {
+      "name": "ScreenConnect",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "ConnectWise, LLC",
+        "ConnectWise, Inc."
+      ],
+      "services": [
+        "ScreenConnect Client (<thumbprint>)"
+      ],
+      "paths": [
+        "C:\\Program Files (x86)\\ScreenConnect Client (Random)\\ScreenConnect.ClientService.exe",
+        "*\\*\\ScreenConnect.ClientService.exe",
+        "C:\\Program Files (x86)\\ScreenConnect Client (<string ID>)\\*",
+        "*\\ScreenConnect Client*\\*",
+        "*\\*\\ScreenConnect.WindowsClient.exe",
+        "*\\ScreenConnect*Client*\\*"
+      ],
+      "logs": [
+        "C:\\Program Files*\\ScreenConnect\\App_Data\\Session.db",
+        "C:\\Program Files*\\ScreenConnect\\App_Data\\User.xml",
+        "C:\\ProgramData\\ScreenConnect Client*\\user.config",
+        "C:\\Program Files (x86)\\ScreenConnect Client (*)\\system.config",
+        "C:\\Program Files*\\ScreenConnect Client*\\app.config",
+        "C:\\Windows\\SystemTemp\\ScreenConnect\\*",
+        "C:\\Users\\*\\Downloads\\ScreenConnect.ClientSetup*.exe",
+        "C:\\Temp\\ScreenConnect.ClientSetup.msi",
+        "C:\\Users\\ScreenConnect.ClientSetup*.exe"
+      ],
+      "domains": [
+        "control.connectwise.com",
+        "*.connectwise.com",
+        "*.screenconnect.com",
+        "instance-*-relay.screenconnect.com",
+        "live.screenconnect.com",
+        "*.247ithelp.com",
+        "*.itsupport247.net",
+        "itsupport247.net"
+      ],
+      "ports": [
+        443,
+        8041
+      ]
+    },
+    {
+      "name": "Supremo",
+      "originalFileNames": [],
+      "fileNames": [
+        "SupremoSystem.exe"
+      ],
+      "products": [],
+      "signers": [
+        "Nanosystems S.r.l."
+      ],
+      "services": [],
+      "paths": [
+        "*\\\\supremoremotedesktop\\\\supremosystem.exe",
+        "%USERPROFILE%\\\\AppData\\\\Local\\\\Temp\\\\SupremoRemoteDesktop\\\\",
+        "C:\\\\ProgramData\\\\SupremoRemoteDesktop\\\\"
+      ],
+      "logs": [],
+      "domains": [
+        "*.supremocontrol.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Zoho Assist",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [],
+      "services": [],
+      "paths": [
+        "*\\ZA_Access.exe"
+      ],
+      "logs": [],
+      "domains": [
+        "*.zoho.com.au",
+        "*.zohoassist.jp",
+        "assist.zoho.com",
+        "*.zoho.in",
+        "downloads.zohodl.com.cn",
+        "*.zohoassist.com",
+        "downloads.zohocdn.com",
+        "gateway.zohoassist.com",
+        "*.zohoassist.com.cn",
+        "*.zoho.com.cn",
+        "*.zoho.com",
+        "*.zoho.eu"
+      ],
+      "ports": []
+    },
+    {
+      "name": "AeroAdmin",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "Aeroadmin LLC"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "auth*.aeroadmin.com",
+        "aeroadmin.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Ammyy Admin",
+      "originalFileNames": [],
+      "fileNames": [
+        "AA_v3.exe"
+      ],
+      "products": [],
+      "signers": [],
+      "services": [
+        "Ammyy Admin"
+      ],
+      "paths": [
+        "C:\\\\ProgramData\\\\AMMYY\\\\*",
+        "C:\\Users\\*\\Downloads\\AMMYY_Admin.exe",
+        "*\\AMMYY_Admin.exe"
+      ],
+      "logs": [
+        "%programdata%\\\\AMMYY\\\\access.log",
+        "%Binary_path%\\\\AA_v3.log"
+      ],
+      "domains": [
+        "ammyy.com",
+        "*.ammyy.com",
+        "136.243.104.235",
+        "136.243.104.242",
+        "136.243.18.122"
+      ],
+      "ports": [
+        5931,
+        80,
+        443,
+        8080
+      ]
+    },
+    {
+      "name": "AnyViewer",
+      "originalFileNames": [
+        "AnyViewer",
+        "RCClient.exe"
+      ],
+      "fileNames": [
+        "AnyViewer.exe",
+        "RCClient.exe",
+        "ScreanCap.exe",
+        "AVCore.exe",
+        "RCService.exe"
+      ],
+      "products": [],
+      "signers": [],
+      "services": [
+        "RCService"
+      ],
+      "paths": [
+        "C:\\Program Files (x86)\\AnyViewer\\*"
+      ],
+      "logs": [],
+      "domains": [
+        "*.anyviewer.com",
+        "*.aomeisoftware.com"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "HopToDesk",
+      "originalFileNames": [],
+      "fileNames": [
+        "HopToDesk.exe"
+      ],
+      "products": [],
+      "signers": [
+        "Begonia Holdings LLC"
+      ],
+      "services": [],
+      "paths": [
+        "C:\\Program Files (x86)\\HopToDesk\\HopToDesk.exe"
+      ],
+      "logs": [
+        "C:\\Program Files (x86)\\HopToDesk\\HopToDesk.exe",
+        "C:\\Program Files (x86)\\HopToDesk\\privacyhelper.exe",
+        "C:\\Program Files (x86)\\HopToDesk\\PrivacyMode.dll",
+        "C:\\Program Files (x86)\\HopToDesk\\sciter.dll",
+        "C:\\Users\\*\\AppData\\Local\\Temp\\sciter.dll",
+        "C:\\Users\\*\\AppData\\Local\\Temp\\privacyhelper.exe",
+        "C:\\Users\\*\\AppData\\Roaming\\HopToDesk\\config\\*",
+        "C:\\Users\\*\\AppData\\Roaming\\HopToDesk\\config\\hoptodesk.toml",
+        "C:\\Users\\*\\AppData\\Roaming\\HopToDesk\\config\\HopToDesk_rCURRENT.log"
+      ],
+      "domains": [
+        "hoptodesk.com",
+        "api.hoptodesk.com",
+        "signal.hoptodesk.com",
+        "turn.hoptodesk.com",
+        "download.hoptodesk.com",
+        "www.hoptodesk.com"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "DWService",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "DWSNET srl"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.dwservice.net"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Chrome Remote Desktop",
+      "originalFileNames": [
+        "remoting_host.exe"
+      ],
+      "fileNames": [
+        "remoting_host.exe"
+      ],
+      "products": [
+        "Chrome Remote Desktop"
+      ],
+      "signers": [],
+      "services": [],
+      "paths": [
+        "C:\\Program Files (x86)\\Google\\Chrome Remote Desktop\\*",
+        "*\\Google\\Chrome Remote Desktop\\*",
+        "*\\remoting_host.exe"
+      ],
+      "logs": [
+        "C:\\Program Files (x86)\\Google\\Chrome Remote Desktop\\*\\remoting_host.exe"
+      ],
+      "domains": [
+        "*.remotedesktop.google.com",
+        "remotedesktop-pa.googleapis.com",
+        "*.remotedesktop-pa.googleapis.com",
+        "remotedesktop.google.com",
+        "chromoting-client.talkgadget.google.com",
+        "chromoting-host.talkgadget.google.com",
+        "chromoting-oauth.talkgadget.google.com"
+      ],
+      "ports": [
+        443,
+        3478
+      ]
+    },
+    {
+      "name": "RemotePC",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [],
+      "services": [],
+      "paths": [
+        "C:\\Program Files (x86)\\RemotePC\\*",
+        "*\\RemotePC\\*",
+        "*\\RemotePCService.exe"
+      ],
+      "logs": [],
+      "domains": [
+        "*.remotedesktop.com",
+        "*.remotepc.com",
+        "www.remotepc.com",
+        "remotepc.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Radmin",
+      "originalFileNames": [
+        "RServer3.exe",
+        "Radmin.exe"
+      ],
+      "fileNames": [
+        "RServer3.exe",
+        "Radmin.exe"
+      ],
+      "products": [
+        "Radmin Server",
+        "Radmin Viewer"
+      ],
+      "signers": [],
+      "services": [],
+      "paths": [
+        "C:\\Program Files (x86)\\Radmin Viewer 3\\Radmin.exe",
+        "C:\\Windows\\SysWOW64\\rserver30\\rserver3.exe",
+        "C:\\Windows\\SysWOW64\\rserver30\\FamItrfc",
+        "C:\\Windows\\SysWOW64\\rserver30\\FamItrf2"
+      ],
+      "logs": [
+        "C:\\Windows\\SysWOW64\\rserver30\\Radm_log.htm",
+        "C:\\Windows\\System32\\rserver30\\Radm_log.htm",
+        "C:\\Windows\\System32\\rserver30\\CHATLOGS\\*\\*.htm",
+        "C:\\Users\\*\\Documents\\ChatLogs\\*\\*.htm"
+      ],
+      "domains": [
+        "radmin.com"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "Splashtop",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "Splashtop Inc."
+      ],
+      "services": [
+        "Splashtop Software Updater Service",
+        "Splashtop® Remote Service",
+        "SplashtopRemoteService"
+      ],
+      "paths": [
+        "C:\\Program Files (x86)\\Splashtop\\*",
+        "*\\Splashtop\\Splashtop Remote\\Client for RMM\\*"
+      ],
+      "logs": [
+        "C:\\windows\\System32\\winevt\\Logs\\Splashtop-Splashtop Streamer-Status%4Operational.evtx",
+        "C:\\windows\\System32\\winevt\\Logs\\Splashtop-Splashtop Streamer-Remote Session%4Operational.evtx",
+        "%PROGRAMDATA%\\Splashtop\\Temp\\log\\FTCLog.txt",
+        "C:\\Program Files (x86)\\Splashtop\\Splashtop Remote\\Server\\log\\agent_log.txt",
+        "C:\\Program Files (x86)\\Splashtop\\Splashtop Remote\\Server\\log\\SPLog.txt",
+        "C:\\Program Files (x86)\\Splashtop\\Splashtop Remote\\Server\\log\\svcinfo.txt",
+        "C:\\Program Files (x86)\\Splashtop\\Splashtop Remote\\Server\\log\\sysinfo.txt",
+        "C:\\Program Files (x86)\\Splashtop\\Splashtop Remote\\Server\\SRService.exe",
+        "C:\\Program Files (x86)\\Splashtop\\Splashtop Remote\\Server\\SRAgent.exe",
+        "C:\\Program Files (x86)\\Splashtop\\Splashtop Software Updater\\SSUAgent.exe",
+        "C:\\Program Files (x86)\\Splashtop\\Splashtop Remote\\Server\\SRUtility.exe",
+        "C:\\Program Files (x86)\\Splashtop\\Splashtop Remote\\Server\\SRFeature.exe",
+        "C:\\Program Files (x86)\\Splashtop\\Splashtop Remote\\Server\\db\\SRAgent.sqlite3"
+      ],
+      "domains": [
+        "*.splashtop.com",
+        "splashtop.com",
+        "*.api.splashtop.com",
+        "*.relay.splashtop.com",
+        "*.api.splashtop.eu"
+      ],
+      "ports": []
+    },
+    {
+      "name": "LogMeIn",
+      "originalFileNames": [],
+      "fileNames": [
+        "lmiguardiansvc.exe",
+        "lmiignition.exe",
+        "logmeinsystray.exe",
+        "logmein.exe"
+      ],
+      "products": [
+        "LMIGuardianSvc"
+      ],
+      "signers": [],
+      "services": [],
+      "paths": [
+        "C:\\Users\\*\\AppData\\Local\\LogMeIn Rescue Applet\\LMIR*.tmp\\lmi_rescue.exe",
+        "C:\\Users\\*\\AppData\\Local\\LogMeIn Rescue Applet\\LMIR*.tmp\\lmi_rescue_srv.exe"
+      ],
+      "logs": [],
+      "domains": [
+        "logmein-gateway.com",
+        "*.logmein.com",
+        "*.logmein.eu",
+        "logmeinrescue.com",
+        "*.logmeininc.com",
+        "*.logmeinrescue.com",
+        "*.logmeinrescue.eu",
+        "rescue-list.*.logmein-gateway.com",
+        "rescue-data-cetner.logmein-gateway.com"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "GoTo Resolve",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [],
+      "services": [
+        "GoToResolve_*"
+      ],
+      "paths": [
+        "C:\\Program Files (x86)\\GoTo Resolve Unattended\\*",
+        "C:\\Program Files\\GoTo Resolve Unattended\\*",
+        "C:\\*\\G2RDesktopConsole-x64.msi",
+        "*\\G2RDesktopConsole-x64.msi"
+      ],
+      "logs": [],
+      "domains": [
+        "goto.com",
+        "*.getgo.com",
+        "*.fastsupport.com",
+        "*.gotoassist.com",
+        "helpme.net",
+        "*.gotoassist.me",
+        "*.gotoassist.at",
+        "*.desktopstreaming.com",
+        "*.cdn.getgo.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "SimpleHelp",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "user_managed",
+        "simple-help.com",
+        "51.255.19.178",
+        "51.255.19.179"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "Iperius Remote",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.iperiusremote.com",
+        "*.iperius.com",
+        "*.iperius-rs.com",
+        "iperiusremote.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "LiteManager",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "IP Ter-Osipov Aleksey Vladimirovich"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.litemanager.ru",
+        "*.litemanager.com",
+        "litemanager.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Remote Utilities",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "REMOTE UTILITIES PTE. LTD."
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.internetid.ru"
+      ],
+      "ports": []
+    },
+    {
+      "name": "NetSupport",
+      "originalFileNames": [
+        "remcmdstub.exe"
+      ],
+      "fileNames": [
+        "remcmdstub.exe",
+        "hypersnap.exe"
+      ],
+      "products": [],
+      "signers": [
+        "NetSupport Ltd",
+        "NETSUPPORT LTD."
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "geo.netsupportsoftware.com",
+        "*.netsupportmanager.com",
+        "netsupportmanager.com",
+        "paternal-angrily.com"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "BeyondTrust",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "Bomgar Corporation"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.beyondtrustcloud.com",
+        "*.bomgarcloud.com",
+        "bomgarcloud.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "ISL Online",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "ISL Online Ltd."
+      ],
+      "services": [],
+      "paths": [
+        "*\\ISLLight.exe",
+        "C:\\Program Files (x86)\\ISL Online\\ISL Light*",
+        "*\\ISL Online\\ISL Light*"
+      ],
+      "logs": [],
+      "domains": [
+        "*.islonline.com",
+        "*.islonline.net",
+        "islonline.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "ShowMyPC",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "ShowMyPC INC"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.showmypc.com",
+        "showmypc.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Mikogo",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "BeamYourScreen GmbH"
+      ],
+      "services": [],
+      "paths": [
+        "C:\\Users\\*\\AppData\\Roaming\\Mikogo\\*",
+        "*Users\\*\\AppData\\Roaming\\Mikogo\\*",
+        "*\\Mikogo-Service.exe",
+        "*\\Mikogo-Screen-Service.exe"
+      ],
+      "logs": [],
+      "domains": [
+        "*.real-time-collaboration.com",
+        "*.mikogo4.com",
+        "*.mikogo.com",
+        "mikogo.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "BeamYourScreen",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "beamyourscreen.com",
+        "*.beamyourscreen.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "GetScreen",
+      "originalFileNames": [
+        "getscreen.exe"
+      ],
+      "fileNames": [
+        "getscreen.exe"
+      ],
+      "products": [],
+      "signers": [
+        "Kopetra Ltd."
+      ],
+      "services": [
+        "Getscreen.me"
+      ],
+      "paths": [
+        "C:\\ProgramData\\Getscreen.me\\",
+        "C:\\Users\\*\\AppData\\Local\\Getscreen.me\\",
+        "C:\\Program Files\\Getscreen.me\\",
+        "C:\\Users\\*\\Downloads\\getscreen-x86.exe",
+        "C:\\Users\\*\\Downloads\\getscreen.upd.exe"
+      ],
+      "logs": [
+        "C:\\ProgramData\\Getscreen.me\\<date>.log",
+        "C:\\ProgramData\\Getscreen.me\\<date>.gui.log",
+        "C:\\ProgramData\\Getscreen.me\\session.inf",
+        "C:\\Users\\*\\AppData\\Local\\Getscreen.me"
+      ],
+      "domains": [
+        "getscreen.me",
+        "*.getscreen.me",
+        "go.getscreen.me",
+        "image.getscreen.me",
+        "px-*.getscreen.me"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "HelpWire",
+      "originalFileNames": [
+        "helpwire.exe"
+      ],
+      "fileNames": [
+        "HelpWire Quick.exe"
+      ],
+      "products": [],
+      "signers": [],
+      "services": [
+        "helpwire-unattended"
+      ],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "helpwire.app",
+        "get.helpwire.app",
+        "api.helpwire.app",
+        "staging.helpwire.app",
+        "account.flexihub.com",
+        "stun.helpwire.app",
+        "stunserver.stunprotocol.org"
+      ],
+      "ports": [
+        443,
+        3478
+      ]
+    },
+    {
+      "name": "FixMe.it",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.fixme.it",
+        "*.techinline.net",
+        "fixme.it"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Any Support",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "KOINO Co., Ltd."
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.anysupport.net"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Alpemix",
+      "originalFileNames": [
+        "Alpemix"
+      ],
+      "fileNames": [
+        "Alpemix.exe"
+      ],
+      "products": [
+        "Alpemix"
+      ],
+      "signers": [
+        "TEKNOPARS BİLİŞİM TEKNOLOJİLERİ SANAYİ VE TİCARET LTD.ŞTİ."
+      ],
+      "services": [
+        "AlpemixSrvc"
+      ],
+      "paths": [
+        "C:\\AlpemixService.exe",
+        "C:\\AlpemixSrvc\\"
+      ],
+      "logs": [
+        "%localappdata%\\Alpemix\\Alpemix.ini"
+      ],
+      "domains": [
+        "*.alpemix.com",
+        "*.teknopars.com"
+      ],
+      "ports": [
+        443,
+        80
+      ]
+    },
+    {
+      "name": "Anyplace Control",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "Anyplace Control Software"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "anyplace-control.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Aspia",
+      "originalFileNames": [
+        "aspia_client.exe"
+      ],
+      "fileNames": [
+        "aspia_client.exe"
+      ],
+      "products": [
+        "Aspia"
+      ],
+      "signers": [],
+      "services": [],
+      "paths": [
+        "*\\aspia_client.exe",
+        "C:\\Program Files\\Aspia\\",
+        "C:\\Program Files (x86)\\Aspia\\"
+      ],
+      "logs": [
+        "C:\\Users\\*\\AppData\\Roaming\\aspia\\client.ini",
+        "C:\\Users\\*\\AppData\\Local\\Temp\\aspia\\aspia_client-*.log",
+        "C:\\Program Files\\Aspia\\Client\\qt.conf"
+      ],
+      "domains": [],
+      "ports": []
+    },
+    {
+      "name": "RemSupp",
+      "originalFileNames": [
+        "RemSupp.exe"
+      ],
+      "fileNames": [
+        "RemSupp_Setup_x64.exe",
+        "RemSupp.exe"
+      ],
+      "products": [
+        "RemSupp"
+      ],
+      "signers": [],
+      "services": [],
+      "paths": [
+        "C:\\Users\\*\\AppData\\Local\\remsupp-updater\\installer.exe",
+        "C:\\Users\\*\\AppData\\Local\\Programs\\RemSupp\\RemSupp.exe",
+        "C:\\Users\\*\\AppData\\Local\\Programs\\RemSupp\\Uninstall RemSupp.exe"
+      ],
+      "logs": [
+        "C:\\Users\\*\\AppData\\Local\\Programs\\RemSupp\\RemSupp.exe",
+        "C:\\Users\\*\\AppData\\Local\\Programs\\RemSupp\\Uninstall RemSupp.exe",
+        "C:\\Users\\*\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\RemSupp.lnk",
+        "C:\\Users\\*\\AppData\\Roaming\\RemSupp\\Local State",
+        "C:\\Users\\*\\AppData\\Roaming\\RemSupp\\Preferences",
+        "C:\\Users\\*\\AppData\\Roaming\\RemSupp\\chromium.log",
+        "C:\\Users\\*\\AppData\\Roaming\\RemSupp\\Crashpad\\metadata",
+        "C:\\Users\\*\\AppData\\Roaming\\RemSupp\\Crashpad\\settings.dat",
+        "C:\\Users\\*\\AppData\\Roaming\\RemSupp\\Local Storage\\leveldb\\*",
+        "C:\\Users\\*\\AppData\\Roaming\\RemSupp\\sentry\\queue\\queue.json",
+        "C:\\Users\\*\\AppData\\Roaming\\RemSupp\\sentry\\scope_v3.json",
+        "C:\\Users\\*\\AppData\\Roaming\\RemSupp\\sentry\\session.json",
+        "C:\\Users\\*\\AppData\\Roaming\\RemSupp\\quitAndInstall.json"
+      ],
+      "domains": [
+        "api.remsupp.com",
+        "download.remsupp.com"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "Rocket Remote Desktop",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [],
+      "ports": []
+    },
+    {
+      "name": "RemoteCall",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "Rsupport Co., Ltd."
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.remotecall.com",
+        "*.startsupport.com",
+        "remotecall.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Remotely",
+      "originalFileNames": [
+        "Remotely_Agent.exe",
+        "Remotely_Desktop.exe"
+      ],
+      "fileNames": [
+        "Remotely_Agent.exe",
+        "Remotely_Desktop.exe"
+      ],
+      "products": [],
+      "signers": [],
+      "services": [
+        "Remotely_Service"
+      ],
+      "paths": [
+        "C:\\Program Files\\Remotely\\Remotely_Agent.exe",
+        "C:\\Program Files\\Remotely\\Desktop\\Remotely_Desktop.exe",
+        "C:\\Program Files\\Remotely\\ConnectionInfo.json",
+        "C:\\Program Files\\Remotely\\etag.txt"
+      ],
+      "logs": [
+        "C:\\Program Files\\Remotely\\Remotely_Agent.exe",
+        "C:\\Program Files\\Remotely\\Desktop\\Remotely_Desktop.exe",
+        "C:\\Program Files\\Remotely\\ConnectionInfo.json",
+        "C:\\Program Files\\Remotely\\etag.txt",
+        "%TEMP%\\Remotely_Install.txt"
+      ],
+      "domains": [],
+      "ports": [
+        443,
+        5000
+      ]
+    },
+    {
+      "name": "MeshCentral",
+      "originalFileNames": [],
+      "fileNames": [
+        "MeshAgent.exe"
+      ],
+      "products": [],
+      "signers": [],
+      "services": [
+        "Mesh Agent background service"
+      ],
+      "paths": [],
+      "logs": [
+        "C:\\Program Files\\Mesh Agent\\MeshAgent.exe",
+        "C:\\Program Files\\Mesh Agent\\MeshAgent.msh"
+      ],
+      "domains": [
+        "user_managed",
+        "meshcentral.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Atera",
+      "originalFileNames": [
+        "AteraAgent.exe"
+      ],
+      "fileNames": [
+        "AteraAgent.exe"
+      ],
+      "products": [],
+      "signers": [
+        "Atera Networks Ltd"
+      ],
+      "services": [
+        "AteraAgent"
+      ],
+      "paths": [
+        "*\\AgentPackageNetworkDiscovery.exe",
+        "*\\AgentPackageTaskScheduler.exe",
+        "*\\ATERA Networks\\AteraAgent\\*",
+        "*\\AteraAgent.exe",
+        "C:\\Program Files\\ATERA Networks\\AteraAgent\\*",
+        "C:\\Program Files\\Atera Networks",
+        "C:\\Program Files (x86)\\Atera Networks"
+      ],
+      "logs": [
+        "C:\\Program Files\\ATERA Networks\\AteraAgent\\Packages\\AgentPackageRunCommandInteractive\\log.txt",
+        "C:\\Program Files\\ATERA Networks\\AteraAgent\\Packages\\*",
+        "C:\\Program Files\\ATERA Networks\\AteraAgent\\AteraAgent.exe",
+        "C:\\Program Files\\Atera Networks\\AlphaAgent.exe",
+        "C:\\Program Files\\ATERA Networks\\AteraAgent\\Packages\\AgentPackageSTRemote\\AgentPackageSTRemote.exe",
+        "C:\\Program Files\\ATERA Networks\\AteraAgent\\Packages\\AgentPackageMonitoring\\AgentPackageMonitoring.exe",
+        "C:\\Program Files\\ATERA Networks\\AteraAgent\\Packages\\AgentPackageHeartbeat\\AgentPackageHeartbeat.exe",
+        "C:\\Program Files\\ATERA Networks\\AteraAgent\\Packages\\AgentPackageFileExplorer\\AgentPackageFileExplorer.exe",
+        "C:\\Program Files\\ATERA Networks\\AteraAgent\\Packages\\AgentPackageRunCommandInteractive\\AgentPackageRunCommandInteractive.exe"
+      ],
+      "domains": [
+        "pubsub.atera.com",
+        "agentreporting.atera.com",
+        "getalphacontrol.com",
+        "app.atera.com",
+        "agenthb.atera.com",
+        "packagesstore.blob.core.windows.net",
+        "agent-api.atera.com",
+        "agentreportingstore.blob.core.windows.net",
+        "atera-agent-heartbeat.servicebus.windows.net",
+        "ps.atera.com",
+        "atera.pubnubapi.com",
+        "appcdn.atera.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Action1",
+      "originalFileNames": [
+        "action1_agent.exe"
+      ],
+      "fileNames": [
+        "action1_connector.exe",
+        "action1_remote.exe",
+        "action1_update.exe",
+        "action1_agent.exe"
+      ],
+      "products": [],
+      "signers": [
+        "Action1 Corporation"
+      ],
+      "services": [
+        "A1Agent"
+      ],
+      "paths": [
+        "C:\\Windows\\Action1\\*"
+      ],
+      "logs": [
+        "C:\\Windows\\Action1\\action1_agent.exe",
+        "C:\\Windows\\Action1\\*",
+        "C:\\Windows\\Action1\\scripts\\*",
+        "C:\\Windows\\Action1\\rule_data\\*",
+        "C:\\Windows\\Action1\\action1_log_*.log"
+      ],
+      "domains": [
+        "*.action1.com",
+        "a1-backend-packages.s3.amazonaws.com"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "Netop",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "NETOP TECH SRL",
+        "Impero Solutions Limited"
+      ],
+      "services": [],
+      "paths": [
+        "C:\\Program Files\\Danware Data\\NetOp Packn Deploy\\*",
+        "*\\Danware Data\\NetOp Packn Deploy\\*",
+        "*\\Netop Remote Control\\*"
+      ],
+      "logs": [],
+      "domains": [
+        "*.connect.backdrop.cloud",
+        "*.netop.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "VNC",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "RealVNC Ltd",
+        "uvnc bvba",
+        "GlavSoft OOO"
+      ],
+      "services": [],
+      "paths": [
+        "C:\\Program Files\\uvnc bvba\\UltraVNC\\*",
+        "*\\uvnc bvba\\UltraVNC\\*",
+        "*\\UVNC_Launch.exe",
+        "*\\winvnc.exe",
+        "*\\vncviewer.exe",
+        "C:\\Program Files\\RealVNC\\VNC Server\\*",
+        "*\\RealVNC\\VNC Server\\*",
+        "C:\\Program Files\\TightVNC\\*",
+        "*\\TightVNC\\*",
+        "*\\tvnserver.exe"
+      ],
+      "logs": [],
+      "domains": [
+        "user_managed",
+        "tightvnc.com",
+        "ultravnc.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "AweSun",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "上海贝锐信息科技股份有限公司"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "asapi*.aweray.net",
+        "client-api.aweray.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Jump Desktop",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "Phase Five Systems LLC",
+        "PhaseFive Systems LLC"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.jumpdesktop.com",
+        "jumpdesktop.com",
+        "jumpto.me",
+        "*.jumpto.me"
+      ],
+      "ports": []
+    },
+    {
+      "name": "FastViewer",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "FastViewer GmbH"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.fastviewer.com",
+        "fastviewer.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "pcvisit",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "pcvisit software ag"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.pcvisit.de",
+        "pcvisit.de"
+      ],
+      "ports": []
+    },
+    {
+      "name": "RuDesktop",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "Advanced Technologies LLC"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.rudesktop.ru",
+        "rudesktop.ru"
+      ],
+      "ports": []
+    },
+    {
+      "name": "RMS (Remote Manipulator System)",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "REMOTE UTILITIES PTE. LTD."
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.internetid.ru",
+        "rmansys.ru"
+      ],
+      "ports": []
+    },
+    {
+      "name": "NinjaOne",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "NinjaOne LLC"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.ninjarmm.com",
+        "*.ninjaone.com",
+        "resources.ninjarmm.com",
+        "ninjaone.com",
+        "ninjarmm.net",
+        "*.ninjarmm.net",
+        "rmmservice.eu",
+        "*.rmmservice.eu",
+        "rmmservice.com.au",
+        "*.rmmservice.com.au",
+        "rmmservice.ca",
+        "*.rmmservice.ca",
+        "ninja-backup.com",
+        "*.ninja-backup.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Syncro",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "Servably Inc."
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "kabuto.io",
+        "*.syncromsp.com",
+        "*.syncroapi.com",
+        "syncromsp.com",
+        "servably.com",
+        "ld.aurelius.host",
+        "app.kabuto.io",
+        "*.kabutoservices.com",
+        "repairshopr.com",
+        "kabutoservices.com",
+        "attachments.servably.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "SuperOps",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "Superops Inc."
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.superopsbeta.com",
+        "superops.ai",
+        "serv.superopsalpha.com",
+        "*.superops.ai",
+        "*.superopsalpha.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Level",
+      "originalFileNames": [],
+      "fileNames": [
+        "level.exe"
+      ],
+      "products": [],
+      "signers": [
+        "Level Software, Inc."
+      ],
+      "services": [
+        "Level"
+      ],
+      "paths": [
+        "C:\\Program Files\\Level\\*"
+      ],
+      "logs": [
+        "C:\\Program Files\\Level\\level.exe",
+        "C:\\Program Files\\Level\\osqueryi.exe",
+        "C:\\Program Files\\Level\\level.log"
+      ],
+      "domains": [
+        "level.io",
+        "*.level.io",
+        "builds.level.io",
+        "agents.level.io",
+        "online.level.io",
+        "downloads.level.io"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "FleetDeck",
+      "originalFileNames": [
+        "fleetdeck_installer"
+      ],
+      "fileNames": [
+        "fleetdeck-agent.exe",
+        "fleetdeck_agent_svc.exe",
+        "fleetdeck-agent.msi",
+        "fd_agent.dll"
+      ],
+      "products": [],
+      "signers": [
+        "FleetDeck Inc",
+        "FLEETDECK INC."
+      ],
+      "services": [],
+      "paths": [
+        "C:\\Program Files (x86)\\FleetDeck Agent\\fleetdeck_agent_svc.exe",
+        "C:\\Program Files (x86)\\FleetDeck Agent\\*\\fleetdeck_agent.exe",
+        "C:\\Program Files (x86)\\FleetDeck Agent\\*\\fd_agent.dll",
+        "C:\\Windows\\Temp\\FleetDeck\\*"
+      ],
+      "logs": [
+        "C:\\Program Files (x86)\\FleetDeck Agent\\fleetdeck_agent_svc.exe",
+        "C:\\Program Files (x86)\\FleetDeck Agent\\*\\fleetdeck_agent.exe",
+        "C:\\Program Files (x86)\\FleetDeck Agent\\*\\fd_agent.dll",
+        "C:\\Windows\\Temp\\FleetDeck\\*"
+      ],
+      "domains": [
+        "*.fleetdeck.io",
+        "fleetdeck.io",
+        "agentmqtt.fleetdeck.io",
+        "checkip.zmazonaws.com"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "Pilixo",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "Plooto Star Inc"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "pilixo.com",
+        "download.pilixo.com",
+        "*.pilixo.com",
+        "donkz.nl"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Seetrol",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "Knowhow Electel Inc."
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "seetrol.co.kr"
+      ],
+      "ports": []
+    },
+    {
+      "name": "HelpU",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "helpU Inc."
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "helpu.co.kr",
+        "*.helpu.co.kr"
+      ],
+      "ports": []
+    },
+    {
+      "name": "KHelpDesk",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "KHELPDESK TECHNOLOGY LTDA"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.khelpdesk.com.br"
+      ],
+      "ports": []
+    },
+    {
+      "name": "NTR Remote",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "Net Transmit & Receive SL"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.ntrsupport.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "SetMe PRO",
+      "originalFileNames": [],
+      "fileNames": [
+        "SetMe_Client.exe",
+        "tinUnattendedModule.exe"
+      ],
+      "products": [
+        "SetMe"
+      ],
+      "signers": [
+        "Techinline Ltd"
+      ],
+      "services": [],
+      "paths": [
+        "C:\\Program Files (x86)\\Techinline Ltd\\SetMe Unattended\\Client\\SetMe_Client.exe",
+        "C:\\Program Files (x86)\\Techinline Ltd\\SetMe Unattended\\Module\\*\\tinUnattendedModule.exe"
+      ],
+      "logs": [
+        "C:\\Program Files (x86)\\Techinline Ltd\\SetMe Unattended\\Client\\SetMe_Client.exe",
+        "C:\\Program Files (x86)\\Techinline Ltd\\SetMe Unattended\\Module\\*\\tinUnattendedModule.exe",
+        "C:\\Users\\*\\AppData\\Local\\Temp\\tinClientExtractor-*\\tinClientDesktopApplication.exe",
+        "C:\\Users\\*\\AppData\\Local\\Temp\\tinClientExtractor-*\\tinClientSessionManager.exe",
+        "C:\\ProgramData\\Techinline Ltd\\settings.ini*",
+        "C:\\ProgramData\\SetMe Client",
+        "C:\\Windows\\Temp\\setme\\Sentry\\*"
+      ],
+      "domains": [
+        "set.me",
+        "*.set.me"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "GotoHTTP",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "合肥屏播网络科技有限公司"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.gotohttp.com",
+        "gotohttp.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Instant Housecall",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.instanthousecall.com",
+        "*.instanthousecall.net",
+        "instanthousecall.com",
+        "secure.instanthousecall.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Xeox",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "hs2n Informationstechnologie GmbH"
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.xeox.com",
+        "xeox.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Gorelo",
+      "originalFileNames": [
+        "Gorelo.Rmm.Setup.exe"
+      ],
+      "fileNames": [
+        "Gorelo.Rmm.Setup.exe"
+      ],
+      "products": [
+        "Gorelo RMM"
+      ],
+      "signers": [
+        "GORELO TECH, INC."
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [
+        "C:\\Program Files\\Gorelo\\Agent\\Plugins\\Downloads\\Gorelo.RemoteManagement.AppManagement.zip",
+        "C:\\Program Files\\Gorelo\\Agent\\Plugins\\Downloads\\Gorelo.RemoteManagement.DeviceChat.zip",
+        "C:\\Program Files\\Gorelo\\Agent\\Plugins\\Downloads\\Gorelo.RemoteManagement.IpAddressDetector.zip",
+        "C:\\Program Files\\Gorelo\\Agent\\Plugins\\Downloads\\Gorelo.RemoteManagement.ScreenCapture.zip",
+        "C:\\Program Files\\Gorelo\\Agent\\Plugins\\Downloads\\Gorelo.RemoteManagement.ScriptRunner.zip",
+        "C:\\Program Files\\Gorelo\\Agent\\Plugins\\Downloads\\Gorelo.RemoteManagement.ServerMonitor.zip",
+        "C:\\Program Files\\Gorelo\\Agent\\Plugins\\Downloads\\Gorelo.RemoteManagement.ShellCommand.zip",
+        "C:\\Program Files\\Gorelo\\Agent\\Plugins\\Downloads\\Gorelo.RemoteManagement.SystemProfiler.zip",
+        "C:\\Program Files\\Gorelo\\Agent\\Plugins\\Downloads\\Gorelo.RemoteManagement.SystemSecurityManagement.zip",
+        "C:\\Program Files\\Gorelo\\Agent\\Plugins\\Downloads\\Gorelo.RemoteManagement.WindowsChecker.zip",
+        "C:\\Program Files\\Gorelo\\Agent\\Plugins\\Downloads\\Gorelo.RemoteManagement.WindowsPatchManagement.zip",
+        "C:\\Program Files\\Gorelo\\Agent\\RMMAgent\\Gorelo.RemoteManagement.Agent\\Gorelo.RemoteManagement.Agent.exe",
+        "C:\\Program Files\\Gorelo\\Agent\\Shell\\Gorelo.RemoteManagement.Shell\\Gorelo.RemoteManagement.Shell.exe",
+        "C:\\Program Files\\Gorelo\\Installer\\Downloads\\Gorelo.RemoteManagement.Agent.zip",
+        "C:\\Program Files\\Gorelo\\Installer\\Downloads\\Gorelo.RemoteManagement.Shell.zip",
+        "C:\\Program Files\\Gorelo\\Installer\\Downloads\\Gorelo.Rmm.Installer.Handler.zip",
+        "C:\\Program Files\\Gorelo\\Installer\\Downloads\\Gorelo.Rmm.Installer.zip",
+        "C:\\Program Files\\Gorelo\\Installer\\Gorelo.Rmm.Installer.Handler\\Gorelo.Rmm.Installer.Handler.exe",
+        "C:\\Program Files\\Gorelo\\Installer\\Gorelo.Rmm.Installer\\Gorelo.Rmm.Installer.exe",
+        "C:\\Program Files\\Gorelo\\LogFiles\\Agent\\diagnostics-*.txt",
+        "C:\\Program Files\\Gorelo\\LogFiles\\Installer\\diagnostics-*.txt",
+        "C:\\Program Files\\Gorelo\\LogFiles\\InstallerHandler\\diagnostics-*.txt",
+        "C:\\Program Files\\Gorelo\\LogFiles\\Shell\\diagnostics-*.txt"
+      ],
+      "domains": [
+        "app.gorelo.io",
+        "gorelo-rmm.azurewebsites.net",
+        "gw.usw.gorelo.tech",
+        "lr.rmm.pod1.usw.gorelo.tech",
+        "public.rmm.pod1.usw.gorelo.tech",
+        "r1.rmm.uw.gorelo.tech",
+        "sr.rmm.pod1.usw.gorelo.tech"
+      ],
+      "ports": [
+        443
+      ]
+    },
+    {
+      "name": "SpyAnywhere",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "Spytech Software and Design, Inc."
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.spytech-web.com",
+        "spyanywhere.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "Tactical RMM",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "login.tailscale.com",
+        "docs.tacticalrmm.com"
+      ],
+      "ports": []
+    },
+    {
+      "name": "RemoteView",
+      "originalFileNames": [],
+      "fileNames": [],
+      "products": [],
+      "signers": [
+        "Rsupport Co., Ltd."
+      ],
+      "services": [],
+      "paths": [],
+      "logs": [],
+      "domains": [
+        "*.content.rview.com",
+        "*.rview.com",
+        "content.rview.com"
+      ],
+      "ports": []
+    }
+  ]
+}

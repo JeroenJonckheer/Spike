@@ -8,3 +8,8 @@ TestResults/
 
 # Python
 __pycache__/
+
+# Downloaded LOLRMM data
+tools/lolrmm-cache/
+tools/phase0/out/
+tools/phase0/dl/

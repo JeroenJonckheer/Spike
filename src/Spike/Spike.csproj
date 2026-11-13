@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <RootNamespace>Spike</RootNamespace>
+    <AssemblyName>Spike</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+    <Product>Spike</Product>
+    <Authors>Jeroen Jonckheer</Authors>
+    <Description>A watchdog that barks when someone takes over your PC remotely. Free and open source.</Description>
+    <Copyright>Copyright © 2026 Jeroen Jonckheer</Copyright>
+    <RepositoryUrl>https://github.com/JeroenJonckheer/Spike</RepositoryUrl>
+  </PropertyGroup>
+
+  <!-- dotnet publish -c Release  →  dist\Spike.exe, one file, no .NET install needed -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>none</DebugType>
+    <PublishDir>$(MSBuildThisFileDirectory)..\..\dist\</PublishDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Spike.Tests" />
+    <EmbeddedResource Include="catalog.json" LogicalName="Spike.catalog.json" Condition="Exists('catalog.json')" />
+  </ItemGroup>
+
+</Project>

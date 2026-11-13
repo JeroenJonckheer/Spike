@@ -1,0 +1,31 @@
+Spike
+Copyright 2026 Jeroen Jonckheer
+
+Spike is licensed under the MIT License (see LICENSE).
+
+--------------------------------------------------------------------------------
+LOLRMM
+--------------------------------------------------------------------------------
+
+src/Spike/catalog.json is derived from LOLRMM:
+
+    LOLRMM
+    https://lolrmm.io
+    https://github.com/magicsword-io/LOLRMM
+    Licensed under the Apache License, Version 2.0
+    http://www.apache.org/licenses/LICENSE-2.0
+
+The file names, product names, services, installation paths, log files, domains and
+ports in catalog.json come from the LOLRMM catalogue (https://lolrmm.io/api/rmm_tools.json),
+filtered and merged by tools/make_catalog.py. The list of programs and the code-signing
+company names were chosen and checked by hand.
+
+--------------------------------------------------------------------------------
+remote-access-tool-blocker
+--------------------------------------------------------------------------------
+
+The selection of programs was compared with, and extended from, the tool list of
+remote-access-tool-blocker:
+
+    https://github.com/pupontech/remote-access-tool-blocker
+    Licensed under the Apache License, Version 2.0
