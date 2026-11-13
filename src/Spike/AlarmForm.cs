@@ -5,7 +5,8 @@ namespace Spike;
 /// <summary>
 /// The red screen Spike shows the moment a remote-access program starts. It covers the
 /// whole screen, stays on top and cannot be closed with the cross, Escape or Alt+F4: the
-/// only ways out are the two big buttons.
+/// only ways out are the two big buttons. The buttons only count a click by a real hand
+/// on the real mouse, so a scammer cannot click them from far away.
 /// </summary>
 internal sealed class AlarmForm : Form
 {
@@ -20,14 +21,18 @@ internal sealed class AlarmForm : Form
     internal event EventHandler? Trusted;
 
     private readonly IReadOnlyList<Helper> _helpers;
+    private readonly Func<bool> _realClick;
     private readonly TableLayoutPanel _column;
     private bool _closingAllowed;
 
-    internal AlarmForm(string program, IReadOnlyList<Helper> helpers, bool test = false)
+    /// <param name="program">Name of the program; empty when unknown (someone else moves the mouse).</param>
+    /// <param name="realClick">True when the last click came from a real hand.</param>
+    internal AlarmForm(string program, IReadOnlyList<Helper> helpers, bool test = false, Func<bool>? realClick = null)
     {
         if (helpers.Count == 0) throw new ArgumentException("At least one helper is needed.", nameof(helpers));
         _helpers = helpers;
-        var t = Text_;
+        _realClick = realClick ?? (() => true);
+        var t = Spike.Text.Current;
         var first = helpers[0];
 
         FormBorderStyle = FormBorderStyle.None;
@@ -40,6 +45,7 @@ internal sealed class AlarmForm : Form
         ForeColor = Color.White;
         Font = new Font("Segoe UI", 20f);
         Text = "Spike";
+        Icon = Program.AppIcon;
 
         _column = new TableLayoutPanel
         {
@@ -51,17 +57,15 @@ internal sealed class AlarmForm : Form
 
         if (test) _column.Controls.Add(Line(t.Test, 16f, FontStyle.Bold, Color.FromArgb(255, 224, 130)));
         _column.Controls.Add(Line(t.AlarmTitle, 40f, FontStyle.Bold));
-        _column.Controls.Add(Line(string.Format(t.AlarmProgram, program), 24f));
+        _column.Controls.Add(Line(string.Format(t.AlarmProgram, string.IsNullOrEmpty(program) ? t.UnknownProgram : program), 24f));
         _column.Controls.Add(Line(t.NeverAsks, 24f));
         _column.Controls.Add(HelperCard(first, helpers.Skip(1)));
 
-        var buttons = new FlowLayoutPanel { AutoSize = true, WrapContents = false, Margin = new Padding(0, 36, 0, 0), BackColor = Color.Transparent };
-        var distrust = BigButton(t.Distrust, PostboxRed, Color.White);
-        distrust.FlatAppearance.BorderColor = Color.White;
-        distrust.FlatAppearance.BorderSize = 6;
-        distrust.Click += (_, _) => Finish(Distrusted);
+        var buttons = Row();
+        var distrust = BigButton(t.Distrust, PostboxRed, Color.White, white: true);
+        distrust.Click += (_, _) => { if (_realClick()) Finish(Distrusted); };
         var trusted = BigButton(string.Format(t.Trusted, first.Name), Color.White, Navy);
-        trusted.Click += (_, _) => ConfirmHelper();
+        trusted.Click += (_, _) => { if (_realClick()) ConfirmHelper(); };
         buttons.Controls.Add(distrust);
         buttons.Controls.Add(trusted);
         _column.Controls.Add(buttons);
@@ -71,10 +75,11 @@ internal sealed class AlarmForm : Form
         Shown += (_, _) => { Centre(); Activate(); };
     }
 
-    private static Text.Language Text_ => Spike.Text.Current;
-
     private void Centre() =>
         _column.Location = new Point(Math.Max(0, (ClientSize.Width - _column.Width) / 2), Math.Max(0, (ClientSize.Height - _column.Height) / 2));
+
+    private static FlowLayoutPanel Row() =>
+        new() { AutoSize = true, WrapContents = false, Margin = new Padding(0, 36, 0, 0), BackColor = Color.Transparent };
 
     private static Label Line(string text, float size, FontStyle style = FontStyle.Regular, Color? colour = null) => new()
     {
@@ -86,18 +91,25 @@ internal sealed class AlarmForm : Form
         Margin = new Padding(0, 0, 0, 14),
     };
 
-    private Control HelperCard(Helper first, IEnumerable<Helper> others)
+    private static Control HelperCard(Helper first, IEnumerable<Helper> others)
     {
-        var t = Text_;
+        var t = Spike.Text.Current;
         var card = new RoundedPanel
         {
             BackColor = Color.White,
             AutoSize = true,
             AutoSizeMode = AutoSizeMode.GrowAndShrink,
-            Padding = new Padding(40, 28, 40, 28),
+            Padding = new Padding(0, 0, 40, 24),
             Margin = new Padding(0, 24, 0, 0),
         };
-        var lines = new FlowLayoutPanel { AutoSize = true, FlowDirection = FlowDirection.TopDown, WrapContents = false, BackColor = Color.White };
+        var lines = new FlowLayoutPanel
+        {
+            AutoSize = true,
+            FlowDirection = FlowDirection.TopDown,
+            WrapContents = false,
+            BackColor = Color.White,
+            Location = new Point(40, 24),
+        };
         lines.Controls.Add(Line(string.Format(t.CallFirst, first.Name, first.Phone), 40f, FontStyle.Bold, Navy));
         foreach (var h in others)
             lines.Controls.Add(Line(string.Format(t.AlsoCall, h.Name, h.Phone), 24f, FontStyle.Regular, Navy));
@@ -105,7 +117,7 @@ internal sealed class AlarmForm : Form
         return card;
     }
 
-    private static Button BigButton(string text, Color back, Color fore)
+    private static Button BigButton(string text, Color back, Color fore, bool white = false)
     {
         var b = new Button
         {
@@ -119,53 +131,78 @@ internal sealed class AlarmForm : Form
             Cursor = Cursors.Hand,
             TabStop = false,
         };
-        b.FlatAppearance.BorderSize = 0;
+        b.FlatAppearance.BorderSize = white ? 6 : 0;
+        b.FlatAppearance.BorderColor = Color.White;
         return b;
     }
 
     /// <summary>One extra question, because a scammer on the phone can say "press that button".</summary>
     private void ConfirmHelper()
     {
-        var t = Text_;
+        var t = Spike.Text.Current;
         var first = _helpers[0];
         _column.Controls.Clear();
         _column.Controls.Add(Line(string.Format(t.ReallyHelper, first.Name, first.Phone), 32f, FontStyle.Bold));
-        var buttons = new FlowLayoutPanel { AutoSize = true, WrapContents = false, Margin = new Padding(0, 36, 0, 0), BackColor = Color.Transparent };
+        var buttons = Row();
+        var no = BigButton(t.NoCutIt, PostboxRed, Color.White, white: true);
+        no.Click += (_, _) => { if (_realClick()) Finish(Distrusted); };
         var yes = BigButton(string.Format(t.YesItIs, first.Name), Color.White, Navy);
-        yes.Click += (_, _) => Finish(Trusted);
-        var no = BigButton(t.NoCutIt, PostboxRed, Color.White);
-        no.FlatAppearance.BorderColor = Color.White;
-        no.FlatAppearance.BorderSize = 6;
-        no.Click += (_, _) => Finish(Distrusted);
+        yes.Click += (_, _) => { if (_realClick()) Finish(Trusted); };
         buttons.Controls.Add(no);
         buttons.Controls.Add(yes);
         _column.Controls.Add(buttons);
         Centre();
     }
 
+    /// <summary>After the red button: the computer is off the internet. Now one button closes the screen.</summary>
+    internal void ShowOffline()
+    {
+        var t = Spike.Text.Current;
+        var first = _helpers[0];
+        _column.Controls.Clear();
+        _column.Controls.Add(Line(t.OffTitle, 40f, FontStyle.Bold));
+        _column.Controls.Add(Line(string.Format(t.OffBody, first.Name, first.Phone), 26f));
+        var row = Row();
+        var ok = BigButton(t.Understood, Color.White, Navy);
+        ok.Click += (_, _) => { if (_realClick()) Finish(null); };
+        row.Controls.Add(ok);
+        _column.Controls.Add(row);
+        Centre();
+        Show();
+        Activate();
+    }
+
     private void Finish(EventHandler? handler)
     {
         handler?.Invoke(this, EventArgs.Empty);
+        if (handler == Distrusted) return; // stays open until the Guard reports "offline"
+        _closingAllowed = true;
+        Close();
+    }
+
+    /// <summary>Closes the screen from code (the program went away by itself).</summary>
+    internal void Dismiss()
+    {
         _closingAllowed = true;
         Close();
     }
 
     protected override void OnFormClosing(FormClosingEventArgs e)
     {
-        // Alt+F4 and the task manager's "close window" end up here: refuse them.
+        // Alt+F4 and "close window" in the task manager end up here: refuse them.
         if (!_closingAllowed && e.CloseReason == CloseReason.UserClosing) e.Cancel = true;
         base.OnFormClosing(e);
     }
 
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData) =>
-        keyData is Keys.Escape or (Keys.Alt | Keys.F4) || base.ProcessCmdKey(ref msg, keyData);
+        keyData is Keys.Escape or (Keys.Alt | Keys.F4) or Keys.Enter or Keys.Space || base.ProcessCmdKey(ref msg, keyData);
 
     /// <summary>A white card with rounded corners.</summary>
     private sealed class RoundedPanel : Panel
     {
         protected override void OnPaintBackground(PaintEventArgs e)
         {
-            e.Graphics.Clear(Parent?.BackColor is { A: > 0 } c ? c : Red);
+            e.Graphics.Clear(Red);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             using var path = new GraphicsPath();
             int r = 28;
