@@ -137,6 +137,65 @@ public class AlarmStateTests
         Assert.NotEmpty(s.RemoteInput(T0 + QuietAfterTrustedUnknown + TimeSpan.FromSeconds(1)));
     }
 
+    private static (AlarmState State, int Id) Trusted(string tool, params int[] pids)
+    {
+        var s = new AlarmState();
+        var id = s.Seen(Running((tool, pids)), T0).OfType<RaiseAlarm>().Single().Id;
+        s.Choose(id, PipeMessage.Trusted, T0);
+        return (s, id);
+    }
+
+    [Fact]
+    public void After_my_helper_the_user_can_still_shut_everything_down()
+    {
+        var (s, id) = Trusted("AnyDesk", 10);
+
+        Assert.Equal([new ShutDown(id)], s.Choose(id, PipeMessage.Distrust, T0.AddMinutes(2)));
+    }
+
+    [Fact]
+    public void My_helper_is_done_closes_the_program_and_the_banner()
+    {
+        var (s, id) = Trusted("AnyDesk", 10, 11);
+
+        var actions = s.Choose(id, PipeMessage.Done, T0.AddMinutes(5));
+
+        Assert.Contains(actions, a => a is HideBanner h && h.Id == id);
+        Assert.Contains(actions, a => a is CloseTool c && c.Pids.Order().SequenceEqual([10, 11]));
+    }
+
+    [Fact]
+    public void A_new_connection_of_a_trusted_program_gives_a_new_alarm_and_freezes_it_again()
+    {
+        var (s, id) = Trusted("AnyDesk", 10);
+
+        var actions = s.NewConnection("AnyDesk", T0.AddMinutes(10));
+
+        Assert.Contains(actions, a => a is HideBanner h && h.Id == id);
+        Assert.Contains(actions, a => a is RaiseAlarm { Tool: "AnyDesk", Again: true } r && r.Id != id);
+        Assert.Contains(actions, a => a is Freeze f && f.Pids.SequenceEqual([10]));
+    }
+
+    [Fact]
+    public void A_new_connection_while_the_alarm_is_still_up_changes_nothing()
+    {
+        var s = new AlarmState();
+        s.Seen(Running(("AnyDesk", [10])), T0);
+
+        Assert.Empty(s.NewConnection("AnyDesk", T0.AddSeconds(5)));
+    }
+
+    [Fact]
+    public void Remote_input_after_a_quiet_while_counts_as_a_new_connection()
+    {
+        var (s, _) = Trusted("AnyDesk", 10);
+        Assert.Empty(s.RemoteInput(T0.AddMinutes(1)));                 // Sanne still at work
+
+        var later = s.RemoteInput(T0.AddMinutes(1) + TrustIdle + TimeSpan.FromSeconds(1));
+
+        Assert.Contains(later, a => a is RaiseAlarm { Again: true });
+    }
+
     [Fact]
     public void A_choice_counts_only_once()
     {

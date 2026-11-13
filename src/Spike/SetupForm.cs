@@ -8,6 +8,8 @@ internal sealed class SetupForm : Form
 {
     private readonly bool _install;
     private readonly List<(TextBox Name, TextBox Phone)> _rows = [];
+    private readonly TextBox _owner = new() { Width = 260 };
+    private readonly ComboBox _language = new() { Width = 260, DropDownStyle = ComboBoxStyle.DropDownList };
     private readonly CheckBox _quickAssist = new() { AutoSize = true, Checked = true };
     private readonly CheckBox _remoteAssistance = new() { AutoSize = true, Checked = true };
     private readonly Label _message = new() { AutoSize = true, ForeColor = AlarmForm.Red, MaximumSize = new Size(560, 0) };
@@ -31,17 +33,32 @@ internal sealed class SetupForm : Form
         var grid = new TableLayoutPanel { AutoSize = true, ColumnCount = 2 };
         grid.Controls.Add(new Label { Text = t.SetupIntro, AutoSize = true, MaximumSize = new Size(560, 0), Margin = new Padding(0, 0, 0, 12) }, 0, 0);
         grid.SetColumnSpan(grid.GetControlFromPosition(0, 0)!, 2);
-        grid.Controls.Add(new Label { Text = t.HelperName, AutoSize = true, Font = new Font(Font, FontStyle.Bold) }, 0, 1);
-        grid.Controls.Add(new Label { Text = t.HelperPhone, AutoSize = true, Font = new Font(Font, FontStyle.Bold) }, 1, 1);
+        var ownerLabel = new Label { Text = t.OwnerLabel, AutoSize = true, MaximumSize = new Size(560, 0), Font = new Font(Font, FontStyle.Bold) };
+        grid.Controls.Add(ownerLabel, 0, 1);
+        grid.SetColumnSpan(ownerLabel, 2);
+        _owner.Text = settings.Owner ?? "";
+        grid.Controls.Add(_owner, 0, 2);
+
+        grid.Controls.Add(new Label { Text = t.LanguageLabel, AutoSize = true, Font = new Font(Font, FontStyle.Bold), Margin = new Padding(3, 12, 3, 0) }, 0, 3);
+        _language.Items.Add(t.LanguageWindows);
+        foreach (var l in Spike.Text.All) _language.Items.Add(l.LanguageName);
+        int chosen = Spike.Text.All.ToList().FindIndex(l => l.Code == settings.Language);
+        _language.SelectedIndex = chosen + 1;
+        grid.Controls.Add(_language, 0, 4);
+
+        var headerName = new Label { Text = t.HelperName, AutoSize = true, Font = new Font(Font, FontStyle.Bold), Margin = new Padding(3, 16, 3, 0) };
+        var headerPhone = new Label { Text = t.HelperPhone, AutoSize = true, Font = new Font(Font, FontStyle.Bold), Margin = new Padding(3, 16, 3, 0) };
+        grid.Controls.Add(headerName, 0, 5);
+        grid.Controls.Add(headerPhone, 1, 5);
         for (int i = 0; i < Settings.MaxHelpers; i++)
         {
             var name = new TextBox { Width = 260, Text = i < settings.Helpers.Count ? settings.Helpers[i].Name : "" };
             var phone = new TextBox { Width = 260, Text = i < settings.Helpers.Count ? settings.Helpers[i].Phone : "" };
-            grid.Controls.Add(name, 0, i + 2);
-            grid.Controls.Add(phone, 1, i + 2);
+            grid.Controls.Add(name, 0, i + 6);
+            grid.Controls.Add(phone, 1, i + 6);
             _rows.Add((name, phone));
         }
-        int row = Settings.MaxHelpers + 2;
+        int row = Settings.MaxHelpers + 6;
         if (install)
         {
             _quickAssist.Text = t.RemoveQuickAssist;
@@ -68,6 +85,8 @@ internal sealed class SetupForm : Form
         var t = Spike.Text.Current;
         var settings = Settings.Load();
         settings.Helpers = _rows.Select(r => new Helper(r.Name.Text, r.Phone.Text)).ToList();
+        settings.Owner = _owner.Text;
+        settings.Language = _language.SelectedIndex <= 0 ? null : Spike.Text.All[_language.SelectedIndex - 1].Code;
         settings.Normalize();
         if (settings.Helpers.Count == 0)
         {

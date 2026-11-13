@@ -6,23 +6,27 @@ namespace Spike;
 ///
 /// Rules:
 /// - A program that starts gives an alarm and is frozen until the user chooses.
-/// - "I don't trust this" shuts everything down.
-/// - "My helper is on the phone" lets that program continue with a banner, until it stops.
-///   When it starts again later, or another program starts, there is a new alarm.
-/// - Someone else moving the mouse without a known program gives an alarm for an
-///   unknown program. After "my helper" it stays quiet for <see cref="QuietAfterTrustedUnknown"/>.
+/// - "I don't trust this" shuts everything down, also later, after "my helper".
+/// - "My helper is on the phone" lets that program continue with a banner. Trust is per
+///   connection: a new incoming connection of the same program gives a new alarm, and so
+///   does someone moving the mouse again after <see cref="TrustIdle"/> of quiet.
+/// - "My helper is done" closes the program.
+/// - Someone else moving the mouse without a known program gives an alarm for an unknown
+///   program. After "my helper" it stays quiet for <see cref="QuietAfterTrustedUnknown"/>.
 /// </summary>
 internal sealed class AlarmState
 {
     internal const string Unknown = "";
     internal static readonly TimeSpan QuietAfterTrustedUnknown = TimeSpan.FromMinutes(30);
+    internal static readonly TimeSpan TrustIdle = TimeSpan.FromMinutes(3);
 
     internal abstract record Action;
-    internal sealed record RaiseAlarm(int Id, string Tool) : Action;
+    internal sealed record RaiseAlarm(int Id, string Tool, bool Again = false) : Action;
     internal sealed record EndAlarm(int Id) : Action;
     internal sealed record Freeze(IReadOnlyList<int> Pids) : Action;
     internal sealed record Unfreeze(IReadOnlyList<int> Pids) : Action;
     internal sealed record ShutDown(int Id) : Action;
+    internal sealed record CloseTool(int Id, IReadOnlyList<int> Pids) : Action;
     internal sealed record ShowBanner(int Id, string Tool) : Action;
     internal sealed record HideBanner(int Id) : Action;
 
@@ -33,6 +37,7 @@ internal sealed class AlarmState
         public DateTime Started { get; } = started;
         public HashSet<int> Pids { get; } = [];
         public string? Choice { get; set; }
+        public DateTime LastRemote { get; set; } = started;
         public bool Trusted => Choice == PipeMessage.Trusted;
     }
 
@@ -44,6 +49,16 @@ internal sealed class AlarmState
 
     internal Incident? Find(int id) => _open.Values.FirstOrDefault(i => i.Id == id);
 
+    private List<Action> Raise(string tool, IEnumerable<int> pids, DateTime now, bool again)
+    {
+        var incident = new Incident(_nextId++, tool, now);
+        _open[tool] = incident;
+        incident.Pids.UnionWith(pids);
+        var actions = new List<Action> { new RaiseAlarm(incident.Id, tool, again) };
+        if (incident.Pids.Count > 0) actions.Add(new Freeze(incident.Pids.ToList()));
+        return actions;
+    }
+
     /// <summary>The programs running right now, by name, with their process ids.</summary>
     internal List<Action> Seen(IReadOnlyDictionary<string, List<int>> running, DateTime now)
     {
@@ -52,11 +67,7 @@ internal sealed class AlarmState
         {
             if (!_open.TryGetValue(tool, out var incident))
             {
-                incident = new Incident(_nextId++, tool, now);
-                _open[tool] = incident;
-                incident.Pids.UnionWith(pids);
-                actions.Add(new RaiseAlarm(incident.Id, tool));
-                if (pids.Count > 0) actions.Add(new Freeze(pids.ToList()));
+                actions.AddRange(Raise(tool, pids, now, again: false));
                 continue;
             }
             var fresh = pids.Where(p => incident.Pids.Add(p)).ToList();
@@ -71,10 +82,32 @@ internal sealed class AlarmState
         return actions;
     }
 
+    /// <summary>A program that the user trusted got a new incoming connection: ask again.</summary>
+    internal List<Action> NewConnection(string tool, DateTime now)
+    {
+        if (!_open.TryGetValue(tool, out var old) || !old.Trusted) return [];
+        _open.Remove(tool);
+        var actions = new List<Action> { new HideBanner(old.Id) };
+        actions.AddRange(Raise(tool, old.Pids, now, again: true));
+        return actions;
+    }
+
     /// <summary>Someone else is moving the mouse or typing.</summary>
     internal List<Action> RemoteInput(DateTime now)
     {
-        if (_open.Count > 0 || now < _quietUntil) return [];
+        if (now < _quietUntil) return [];
+        var trusted = _open.Values.Where(i => i.Trusted).ToList();
+        if (trusted.Count > 0)
+        {
+            var actions = new List<Action>();
+            foreach (var t in trusted)
+            {
+                if (now - t.LastRemote > TrustIdle) actions.AddRange(NewConnection(t.Tool, now));
+                else t.LastRemote = now;
+            }
+            return actions;
+        }
+        if (_open.Count > 0) return [];
         var incident = new Incident(_nextId++, Unknown, now);
         _open[Unknown] = incident;
         return [new RaiseAlarm(incident.Id, Unknown)];
@@ -83,16 +116,26 @@ internal sealed class AlarmState
     internal List<Action> Choose(int id, string choice, DateTime now)
     {
         var incident = Find(id);
-        if (incident is null || incident.Choice is not null) return [];
-        incident.Choice = choice;
+        if (incident is null) return [];
 
-        if (choice == PipeMessage.Distrust)
+        if (choice == PipeMessage.Distrust && incident.Choice is null or PipeMessage.Trusted)
         {
-            // Everything goes: other open alarms are answered by the same shutdown.
-            foreach (var other in _open.Values) other.Choice ??= PipeMessage.Distrust;
+            // Everything goes, also after "my helper": other open alarms get the same answer.
+            incident.Choice = choice;
+            foreach (var other in _open.Values) other.Choice = PipeMessage.Distrust;
             _open.Clear();
             return [new ShutDown(id)];
         }
+
+        if (choice == PipeMessage.Done && incident.Trusted)
+        {
+            _open.Remove(incident.Tool);
+            return [new HideBanner(id), new CloseTool(id, incident.Pids.ToList())];
+        }
+
+        if (choice != PipeMessage.Trusted || incident.Choice is not null) return [];
+        incident.Choice = choice;
+        incident.LastRemote = now;
 
         if (incident.Tool == Unknown)
         {

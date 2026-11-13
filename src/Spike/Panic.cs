@@ -25,6 +25,12 @@ internal sealed class Panic(Catalog catalog, Func<string, string, int>? run = nu
         GoOffline(AdaptersThatAreUp());
     }
 
+    /// <summary>"My helper is done": close the program, the network stays on.</summary>
+    internal void CloseTools(IEnumerable<int> pids)
+    {
+        foreach (var pid in pids) Kill(pid);
+    }
+
     private void Kill(int pid)
     {
         try

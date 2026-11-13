@@ -27,11 +27,13 @@ internal sealed record PipeMessage
 
     internal const string Distrust = "distrust";
     internal const string Trusted = "trusted";
+    internal const string Done = "done";              // the helper is done: close the program
 
     public string Type { get; init; } = "";
     public int Id { get; init; }
     public string? Tool { get; init; }
     public bool Test { get; init; }
+    public bool Again { get; init; }   // alarm for a new connection of a program the user trusted before
     public bool On { get; init; }
     public string? Pick { get; init; }
     public int Count { get; init; }

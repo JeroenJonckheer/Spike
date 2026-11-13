@@ -22,15 +22,20 @@ internal sealed class AlarmForm : Form
 
     private readonly IReadOnlyList<Helper> _helpers;
     private readonly Func<bool> _realClick;
+    private readonly string? _owner;
     private readonly TableLayoutPanel _column;
     private bool _closingAllowed;
 
     /// <param name="program">Name of the program; empty when unknown (someone else moves the mouse).</param>
     /// <param name="realClick">True when the last click came from a real hand.</param>
-    internal AlarmForm(string program, IReadOnlyList<Helper> helpers, bool test = false, Func<bool>? realClick = null)
+    /// <param name="owner">Name of the person who uses this computer, so the alarm speaks to them.</param>
+    /// <param name="again">A new connection of a program the user trusted before.</param>
+    internal AlarmForm(string program, IReadOnlyList<Helper> helpers, bool test = false, Func<bool>? realClick = null,
+        string? owner = null, bool again = false)
     {
         if (helpers.Count == 0) throw new ArgumentException("At least one helper is needed.", nameof(helpers));
         _helpers = helpers;
+        _owner = owner;
         _realClick = realClick ?? (() => true);
         var t = Spike.Text.Current;
         var first = helpers[0];
@@ -56,8 +61,9 @@ internal sealed class AlarmForm : Form
         };
 
         if (test) _column.Controls.Add(Line(t.Test, 16f, FontStyle.Bold, Color.FromArgb(255, 224, 130)));
-        _column.Controls.Add(Line(t.AlarmTitle, 40f, FontStyle.Bold));
-        _column.Controls.Add(Line(string.Format(t.AlarmProgram, string.IsNullOrEmpty(program) ? t.UnknownProgram : program), 24f));
+        _column.Controls.Add(Line(owner is null ? t.AlarmTitle : string.Format(t.AlarmTitleOwner, owner), 40f, FontStyle.Bold));
+        var name = string.IsNullOrEmpty(program) ? t.UnknownProgram : again ? string.Format(t.NewConnection, program) : program;
+        _column.Controls.Add(Line(string.Format(t.AlarmProgram, name), 24f));
         _column.Controls.Add(Line(t.NeverAsks, 24f));
         _column.Controls.Add(HelperCard(first, helpers.Skip(1)));
 
@@ -142,7 +148,9 @@ internal sealed class AlarmForm : Form
         var t = Spike.Text.Current;
         var first = _helpers[0];
         _column.Controls.Clear();
-        _column.Controls.Add(Line(string.Format(t.ReallyHelper, first.Name, first.Phone), 32f, FontStyle.Bold));
+        _column.Controls.Add(Line(_owner is null
+            ? string.Format(t.ReallyHelper, first.Name, first.Phone)
+            : string.Format(t.ReallyHelperOwner, _owner, first.Name, first.Phone), 32f, FontStyle.Bold));
         var buttons = Row();
         var no = BigButton(t.NoCutIt, PostboxRed, Color.White, white: true);
         no.Click += (_, _) => { if (_realClick()) Finish(Distrusted); };

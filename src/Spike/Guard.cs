@@ -84,6 +84,7 @@ internal sealed class Guard : IDisposable
                     foreach (var e in _evidence.Values)
                         foreach (var p in started) e.Started(p);
                 Apply(_state.Seen(running, now), now);
+                WatchConnectionLogs(running.Keys, now);
 
                 if (_evidence.Count > 0 && _ticks % 2 == 0) RecordConnections();
                 if (_startDogs && _ticks % 5 == 0) EnsureDogs();
@@ -92,6 +93,43 @@ internal sealed class Guard : IDisposable
             catch (Exception e) { Log($"error: {e}"); }
             _ticks++;
         }
+    }
+
+    private readonly Dictionary<string, long> _logSizes = new(StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// AnyDesk and TeamViewer write every incoming connection to a log file. When such a log
+    /// grows while the program runs, someone connected again: trust was for the previous
+    /// connection only.
+    /// </summary>
+    private void WatchConnectionLogs(IEnumerable<string> running, DateTime now)
+    {
+        foreach (var name in running)
+        {
+            var tool = _catalog.Tools.FirstOrDefault(t => t.Name == name);
+            if (tool is null) continue;
+            foreach (var pattern in tool.Logs.Where(IsConnectionLog))
+            {
+                foreach (var file in Evidence.Expand(pattern, Profiles()))
+                {
+                    long size;
+                    try { size = new FileInfo(file).Length; } catch (IOException) { continue; }
+                    if (_logSizes.TryGetValue(file, out var before) && size > before)
+                    {
+                        Log($"new connection in {file}");
+                        Apply(_state.NewConnection(name, now), now);
+                    }
+                    _logSizes[file] = size;
+                }
+            }
+        }
+    }
+
+    internal static bool IsConnectionLog(string path)
+    {
+        var file = Path.GetFileName(path);
+        return file.EndsWith(".txt", StringComparison.OrdinalIgnoreCase)
+            && (file.Contains("connection", StringComparison.OrdinalIgnoreCase) || file.Contains("incoming", StringComparison.OrdinalIgnoreCase));
     }
 
     private void RecordConnections()
@@ -110,8 +148,12 @@ internal sealed class Guard : IDisposable
             var now = DateTime.Now;
             switch (m.Type)
             {
-                case PipeMessage.Choice when m.Id > 0 && m.Pick is PipeMessage.Distrust or PipeMessage.Trusted:
-                    if (_evidence.TryGetValue(m.Id, out var ev)) ev.Choice(m.Pick!, _settings.HelpersOrDefault[0].Name);
+                case PipeMessage.Choice when m.Id > 0 && m.Pick is PipeMessage.Distrust or PipeMessage.Trusted or PipeMessage.Done:
+                    if (_evidence.TryGetValue(m.Id, out var ev))
+                    {
+                        if (m.Pick == PipeMessage.Done) ev.Log($"{_settings.HelpersOrDefault[0].Name}: done, program closed");
+                        else ev.Choice(m.Pick!, _settings.HelpersOrDefault[0].Name);
+                    }
                     Log($"choice for incident {m.Id}: {m.Pick}");
                     Apply(_state.Choose(m.Id, m.Pick!, now), now);
                     break;
@@ -141,7 +183,7 @@ internal sealed class Guard : IDisposable
                     _evidence[a.Id] = ev;
                     _toolNames[a.Id] = a.Tool;
                     Log($"ALARM {a.Id}: {(a.Tool.Length == 0 ? "remote input" : a.Tool)}");
-                    _pipe?.Broadcast(new PipeMessage { Type = PipeMessage.Alarm, Id = a.Id, Tool = a.Tool });
+                    _pipe?.Broadcast(new PipeMessage { Type = PipeMessage.Alarm, Id = a.Id, Tool = a.Tool, Again = a.Again });
                     _pipe?.Broadcast(new PipeMessage { Type = PipeMessage.Record, On = true });
                     break;
                 case AlarmState.Freeze f:
@@ -164,6 +206,11 @@ internal sealed class Guard : IDisposable
                     foreach (var l in _panic.Log) Log(l);
                     _pipe?.Broadcast(new PipeMessage { Type = PipeMessage.Offline, Id = s.Id });
                     _pipe?.Broadcast(new PipeMessage { Type = PipeMessage.Record, On = false });
+                    break;
+                case AlarmState.CloseTool c:
+                    _panic.Log.Clear();
+                    _panic.CloseTools(c.Pids);
+                    foreach (var l in _panic.Log) Log(l);
                     break;
                 case AlarmState.ShowBanner b:
                     _pipe?.Broadcast(new PipeMessage { Type = PipeMessage.Banner, Id = b.Id, Tool = b.Tool });

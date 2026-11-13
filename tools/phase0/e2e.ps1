@@ -12,7 +12,7 @@ Start-Transcript "$out\transcript.txt" | Out-Null
 function Step($text) { Write-Host "$(Get-Date -Format HH:mm:ss)  $text" }
 
 Step 'install Spike'
-$p = Start-Process 'C:\spike\Spike.exe' -ArgumentList '--install-quiet', 'Sanne', '"06-12 34 56 78"' -Wait -PassThru
+$p = Start-Process 'C:\spike\Spike.exe' -ArgumentList '--install-quiet', 'Sanne', '"06-12 34 56 78"', 'Nico', 'nl' -Wait -PassThru
 Step "install exit code $($p.ExitCode)"
 Start-Sleep -Seconds 15
 Get-Service Spike | Format-List Name, Status, StartType | Out-String | Write-Host

@@ -67,9 +67,14 @@ internal static class Program
                 return 0;
 
             case "--install-quiet" when args.Length >= 3:
-                // For tests and IT staff: Spike.exe --install-quiet "Sanne" "06-12 34 56 78"
+                // For tests and IT staff: Spike.exe --install-quiet "Sanne" "06-12 34 56 78" ["Nico"] ["nl"]
                 if (!Installer.IsAdministrator()) return 1;
-                var quiet = new Settings { Helpers = [new Helper(args[1], args[2])] };
+                var quiet = new Settings
+                {
+                    Helpers = [new Helper(args[1], args[2])],
+                    Owner = args.Length > 3 ? args[3] : null,
+                    Language = args.Length > 4 ? args[4] : null,
+                };
                 foreach (var line in Installer.Install(quiet, removeQuickAssist: false, disableRemoteAssistance: false))
                     Console.WriteLine(line);
                 return 0;

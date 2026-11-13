@@ -64,7 +64,17 @@ internal static class Text
         string ChoiceTrusted,
         string ChoiceNone,
         string SummaryAddresses,
-        string SummaryMore);
+        string SummaryMore,
+        // Spoken to by name, banner, setup
+        string LanguageName,
+        string AlarmTitleOwner,
+        string ReallyHelperOwner,
+        string NewConnection,
+        string BannerDone,
+        string BannerDistrust,
+        string OwnerLabel,
+        string LanguageLabel,
+        string LanguageWindows);
 
     private static readonly Language English = new(
         Code: "en",
@@ -118,7 +128,16 @@ internal static class Text
         ChoiceTrusted: "the user said {0} was helping",
         ChoiceNone: "the user made no choice",
         SummaryAddresses: "Internet addresses the program connected to",
-        SummaryMore: "The other files in this folder hold the details: logboek.txt, verbindingen.csv, processen.csv, bestanden.csv, screenshots and the program's own logs.");
+        SummaryMore: "The other files in this folder hold the details: logboek.txt, verbindingen.csv, processen.csv, bestanden.csv, screenshots and the program's own logs.",
+        LanguageName: "English",
+        AlarmTitleOwner: "{0}, stop! Someone is trying to take over your computer.",
+        ReallyHelperOwner: "{0}, are you really talking to {1}? If in doubt, hang up and call {1} yourself: {2}",
+        NewConnection: "{0} (a new connection)",
+        BannerDone: "{0} is done:\nclose the program",
+        BannerDistrust: "I don't trust it after all:\nshut it all down",
+        OwnerLabel: "Name of the person who uses this computer (the alarm speaks to them)",
+        LanguageLabel: "Language",
+        LanguageWindows: "Language of Windows");
 
     private static readonly Language Dutch = new(
         Code: "nl",
@@ -172,7 +191,16 @@ internal static class Text
         ChoiceTrusted: "de gebruiker gaf aan dat {0} hielp",
         ChoiceNone: "de gebruiker maakte geen keuze",
         SummaryAddresses: "Internetadressen waarmee het programma verbinding had",
-        SummaryMore: "De andere bestanden in deze map bevatten de details: logboek.txt, verbindingen.csv, processen.csv, bestanden.csv, schermafbeeldingen en de eigen logbestanden van het programma.");
+        SummaryMore: "De andere bestanden in deze map bevatten de details: logboek.txt, verbindingen.csv, processen.csv, bestanden.csv, schermafbeeldingen en de eigen logbestanden van het programma.",
+        LanguageName: "Nederlands",
+        AlarmTitleOwner: "{0}, stop! Iemand probeert uw computer over te nemen.",
+        ReallyHelperOwner: "{0}, spreekt u nu echt met {1}? Twijfelt u, hang dan op en bel {1} zelf: {2}",
+        NewConnection: "{0} (een nieuwe verbinding)",
+        BannerDone: "{0} is klaar:\nprogramma sluiten",
+        BannerDistrust: "Ik vertrouw het toch niet:\nalles eruit",
+        OwnerLabel: "Naam van wie deze computer gebruikt (het alarm spreekt die persoon aan)",
+        LanguageLabel: "Taal",
+        LanguageWindows: "Taal van Windows");
 
     internal static readonly IReadOnlyList<Language> All = [Dutch, English];
 

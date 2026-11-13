@@ -13,6 +13,9 @@ internal sealed class Settings
 
     public List<Helper> Helpers { get; set; } = [];
 
+    /// <summary>The person who uses this computer, so the alarm speaks to him or her by name.</summary>
+    public string? Owner { get; set; }
+
     /// <summary>"nl", "en" … or null for the language of Windows.</summary>
     public string? Language { get; set; }
 
@@ -46,12 +49,15 @@ internal sealed class Settings
     }
 
     /// <summary>Drops empty helpers and keeps at most <see cref="MaxHelpers"/>.</summary>
-    internal void Normalize() =>
+    internal void Normalize()
+    {
+        Owner = string.IsNullOrWhiteSpace(Owner) ? null : Owner.Trim();
         Helpers = Helpers
             .Where(h => h is not null && !string.IsNullOrWhiteSpace(h.Name) && !string.IsNullOrWhiteSpace(h.Phone))
             .Select(h => new Helper(h.Name.Trim(), h.Phone.Trim()))
             .Take(MaxHelpers)
             .ToList();
+    }
 
     /// <summary>The helpers to show; the Dutch Fraud Helpdesk when none were set (should not happen after setup).</summary>
     internal IReadOnlyList<Helper> HelpersOrDefault =>

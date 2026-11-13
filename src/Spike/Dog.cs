@@ -46,11 +46,12 @@ internal sealed class Dog : ApplicationContext
 
     private void OnMessage(PipeMessage m)
     {
-        _settings = Settings.Load(); // the helper may have changed a name or number
+        _settings = Settings.Load(); // the helper may have changed a name, number or language
+        Text.Current = Text.FromCode(_settings.Language);
         switch (m.Type)
         {
             case PipeMessage.Alarm:
-                ShowAlarm(m.Id, m.Tool ?? "", m.Test);
+                ShowAlarm(m.Id, m.Tool ?? "", m.Test, m.Again);
                 break;
             case PipeMessage.AlarmEnd:
                 if (_alarms.Remove(m.Id, out var gone)) gone.Dismiss();
@@ -64,8 +65,20 @@ internal sealed class Dog : ApplicationContext
                 break;
             case PipeMessage.Banner:
                 _banner?.Close();
-                _banner = new BannerForm(string.Format(Text.Current.HelperWatching, _settings.HelpersOrDefault[0].Name,
-                    string.IsNullOrEmpty(m.Tool) ? "?" : m.Tool));
+                int id = m.Id;
+                var helper = _settings.HelpersOrDefault[0].Name;
+                _banner = new BannerForm(
+                    string.Format(Text.Current.HelperWatching, helper, string.IsNullOrEmpty(m.Tool) ? "?" : m.Tool),
+                    string.Format(Text.Current.BannerDone, helper),
+                    Text.Current.BannerDistrust,
+                    RealClick);
+                _banner.Done += () => _pipe.Send(new PipeMessage { Type = PipeMessage.Choice, Id = id, Pick = PipeMessage.Done });
+                _banner.Distrust += () =>
+                {
+                    _pipe.Send(new PipeMessage { Type = PipeMessage.Choice, Id = id, Pick = PipeMessage.Distrust });
+                    _banner?.Close();
+                    _banner = null;
+                };
                 _banner.Show();
                 break;
             case PipeMessage.BannerEnd:
@@ -93,13 +106,17 @@ internal sealed class Dog : ApplicationContext
         }
     }
 
-    private AlarmForm NewAlarm(string tool, bool test) =>
-        new(tool, _settings.HelpersOrDefault, test, () => _input.RecentClickWasPhysical || !_input.Detecting);
+    private bool RealClick() => _input.RecentClickWasPhysical || !_input.Detecting;
 
-    private void ShowAlarm(int id, string tool, bool test)
+    private AlarmForm NewAlarm(string tool, bool test, bool again = false) =>
+        new(tool, _settings.HelpersOrDefault, test, RealClick, _settings.Owner, again);
+
+    private void ShowAlarm(int id, string tool, bool test, bool again = false)
     {
         if (_alarms.ContainsKey(id)) return;
-        var form = NewAlarm(tool, test);
+        _banner?.Close();
+        _banner = null;
+        var form = NewAlarm(tool, test, again);
         _alarms[id] = form;
         form.Distrusted += (_, _) =>
         {
@@ -182,25 +199,34 @@ internal sealed class Dog : ApplicationContext
         base.Dispose(disposing);
     }
 
-    /// <summary>A small orange bar at the top of the screen while a trusted helper is watching.</summary>
+    /// <summary>
+    /// An orange bar at the top of the screen while a trusted helper is watching, with two
+    /// ways out: the helper is done (close the program) or "I don't trust it after all".
+    /// </summary>
     private sealed class BannerForm : Form
     {
-        internal BannerForm(string text)
+        internal event Action? Done;
+        internal event Action? Distrust;
+
+        internal BannerForm(string text, string doneText, string distrustText, Func<bool> realClick)
         {
             FormBorderStyle = FormBorderStyle.None;
             TopMost = true;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.Manual;
             BackColor = Color.FromArgb(255, 160, 0);
-            var label = new Label
+            var row = new FlowLayoutPanel { AutoSize = true, WrapContents = false, Padding = new Padding(12, 8, 12, 8), BackColor = BackColor };
+            row.Controls.Add(new Label
             {
                 Text = text,
                 AutoSize = true,
                 Font = new Font("Segoe UI", 16f, FontStyle.Bold),
                 ForeColor = AlarmForm.Navy,
-                Padding = new Padding(20, 8, 20, 8),
-            };
-            Controls.Add(label);
+                Margin = new Padding(8, 18, 24, 0),
+            });
+            row.Controls.Add(Button(doneText, Color.White, AlarmForm.Navy, () => { if (realClick()) Done?.Invoke(); }));
+            row.Controls.Add(Button(distrustText, AlarmForm.PostboxRed, Color.White, () => { if (realClick()) Distrust?.Invoke(); }));
+            Controls.Add(row);
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             Shown += (_, _) =>
@@ -208,6 +234,26 @@ internal sealed class Dog : ApplicationContext
                 var screen = Screen.PrimaryScreen?.WorkingArea ?? new Rectangle(0, 0, 1280, 800);
                 Location = new Point(screen.Left + (screen.Width - Width) / 2, screen.Top);
             };
+        }
+
+        private static Button Button(string text, Color back, Color fore, Action click)
+        {
+            var b = new Button
+            {
+                Text = text,
+                AutoSize = true,
+                Font = new Font("Segoe UI", 12f, FontStyle.Bold),
+                BackColor = back,
+                ForeColor = fore,
+                FlatStyle = FlatStyle.Flat,
+                Padding = new Padding(10, 4, 10, 4),
+                Margin = new Padding(8, 4, 8, 4),
+                TabStop = false,
+                Cursor = Cursors.Hand,
+            };
+            b.FlatAppearance.BorderSize = 0;
+            b.Click += (_, _) => click();
+            return b;
         }
 
         protected override bool ShowWithoutActivation => true;
