@@ -1,0 +1,10 @@
+# Build output
+bin/
+obj/
+dist/
+*.user
+.vs/
+TestResults/
+
+# Python
+__pycache__/
