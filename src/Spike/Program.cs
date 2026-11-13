@@ -66,6 +66,14 @@ internal static class Program
                 Application.Run(new SetupForm(install: role == "--install" || !Installer.IsInstalled()));
                 return 0;
 
+            case "--install-quiet" when args.Length >= 3:
+                // For tests and IT staff: Spike.exe --install-quiet "Sanne" "06-12 34 56 78"
+                if (!Installer.IsAdministrator()) return 1;
+                var quiet = new Settings { Helpers = [new Helper(args[1], args[2])] };
+                foreach (var line in Installer.Install(quiet, removeQuickAssist: false, disableRemoteAssistance: false))
+                    Console.WriteLine(line);
+                return 0;
+
             case "--uninstall":
                 if (!Elevated(role)) return 1;
                 using (var ask = new UninstallForm())

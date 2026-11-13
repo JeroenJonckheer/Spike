@@ -20,6 +20,7 @@ internal sealed class Dog : ApplicationContext
     private readonly System.Windows.Forms.Timer _shots = new() { Interval = 3000 };
     private Settings _settings = Settings.Load();
     private BannerForm? _banner;
+    private readonly Dictionary<string, DateTime> _warned = new(StringComparer.OrdinalIgnoreCase);
 
     internal Dog()
     {
@@ -75,6 +76,10 @@ internal sealed class Dog : ApplicationContext
                 Warn(string.Format(Text.Current.StopAttempt, _settings.HelpersOrDefault[0].Name, _settings.HelpersOrDefault[0].Phone));
                 break;
             case PipeMessage.Download:
+                // Not on top of an alarm, and once per program per ten minutes.
+                if (_alarms.Count > 0 || m.Tool is null) break;
+                if (_warned.TryGetValue(m.Tool, out var when) && DateTime.Now - when < TimeSpan.FromMinutes(10)) break;
+                _warned[m.Tool] = DateTime.Now;
                 var h = _settings.HelpersOrDefault[0];
                 Warn(string.Format(Text.Current.DownloadTitle, m.Tool) + "\n\n" + string.Format(Text.Current.DownloadBody, h.Name, h.Phone));
                 break;
