@@ -8,6 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <ApplicationIcon>Spike.ico</ApplicationIcon>
     <RootNamespace>Spike</RootNamespace>
     <AssemblyName>Spike</AssemblyName>
   </PropertyGroup>

@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/icon.png" width="96" alt="">
+
 # Spike
 
 **A watchdog for your computer.**
