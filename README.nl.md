@@ -4,8 +4,8 @@
 
 # Spike
 
-**Een waakhond voor uw computer.**
-Gratis, open source en privé. Eén klein programma voor Windows.
+**Een trouwe waakhond voor uw computer.**
+Gratis, privé en altijd op wacht. Eén klein programma voor Windows.
 
 [![Licentie: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -17,6 +17,12 @@ Gratis, open source en privé. Eén klein programma voor Windows.
 
 > **Spike wordt nog gebouwd.** Er is nog niets te downloaden. Deze pagina beschrijft wat Spike gaat doen.
 > Het ontwerp staat in [docs/ontwerp.md](docs/ontwerp.md).
+
+Op een trouwe viervoeter kunt u altijd rekenen. Hij kent uw huis, hij kent uw familie en hij
+slaat aan zodra er een vreemde aan de deur staat. Zo waakt Spike over uw computer. Hij ligt
+rustig in de hoek van het scherm en u merkt niets van hem. Tot iemand probeert binnen te komen.
+
+**Spike weet wanneer u gevaar loopt, nog voordat het te laat is.**
 
 ## Waarom
 

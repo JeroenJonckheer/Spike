@@ -149,6 +149,18 @@ SIGNERS = {
     "SpyAnywhere": ["Spytech Software and Design, Inc."],
 }
 
+# Seen in our own measurements (phase 0, Windows Sandbox, 13-11-2026); LOLRMM misses these.
+MEASURED = {
+    "AnyDesk": {"products": ["AnyDesk"]},
+    "TeamViewer": {"originalFileNames": ["TeamViewer.exe", "tv_w32.exe", "tv_x64.exe", "tv_ARM64.exe"]},
+    "RustDesk": {"products": ["RustDesk"], "originalFileNames": ["rustdesk.exe"]},
+    "UltraViewer": {"products": ["UltraViewer", "UltraViewerService"],
+                    "originalFileNames": ["UltraViewer_Service.exe"], "services": ["UltraViewService"]},
+    # Windows 11 installs Quick Assist as a Store app.
+    "Quick Assist": {"paths": [r"*\WindowsApps\MicrosoftCorporationII.QuickAssist_*\*"],
+                     "fileNames": ["QuickAssist.exe"]},
+}
+
 # Services that other programs install as well.
 GENERIC_SERVICES = {"winring0_1_2_0"}
 
@@ -237,6 +249,9 @@ def build(tools, certs):
                             entry["ports"].append(port)
         for s in SIGNERS.get(shown, []):
             add(entry["signers"], s, BROAD_SIGNERS)
+        for key, values in MEASURED.get(shown, {}).items():
+            for v in values:
+                add(entry[key], v)
         if not found:
             missing.append(shown)
             continue

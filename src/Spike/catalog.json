@@ -68,7 +68,12 @@
     },
     {
       "name": "TeamViewer",
-      "originalFileNames": [],
+      "originalFileNames": [
+        "TeamViewer.exe",
+        "tv_w32.exe",
+        "tv_x64.exe",
+        "tv_ARM64.exe"
+      ],
       "fileNames": [
         "TeamViewer.exe"
       ],
@@ -111,12 +116,15 @@
     {
       "name": "Quick Assist",
       "originalFileNames": [],
-      "fileNames": [],
+      "fileNames": [
+        "QuickAssist.exe"
+      ],
       "products": [],
       "signers": [],
       "services": [],
       "paths": [
-        "C:\\Windows\\System32\\QuickAssist.exe"
+        "C:\\Windows\\System32\\QuickAssist.exe",
+        "*\\WindowsApps\\MicrosoftCorporationII.QuickAssist_*\\*"
       ],
       "logs": [
         "C:\\Windows\\System32\\QuickAssist.exe"
@@ -130,11 +138,15 @@
     },
     {
       "name": "RustDesk",
-      "originalFileNames": [],
+      "originalFileNames": [
+        "rustdesk.exe"
+      ],
       "fileNames": [
         "rustdesk.exe"
       ],
-      "products": [],
+      "products": [
+        "RustDesk"
+      ],
       "signers": [
         "PURSLANE"
       ],
@@ -173,13 +185,20 @@
     },
     {
       "name": "UltraViewer",
-      "originalFileNames": [],
+      "originalFileNames": [
+        "UltraViewer_Service.exe"
+      ],
       "fileNames": [],
-      "products": [],
+      "products": [
+        "UltraViewer",
+        "UltraViewerService"
+      ],
       "signers": [
         "DUC FABULOUS CO.,LTD"
       ],
-      "services": [],
+      "services": [
+        "UltraViewService"
+      ],
       "paths": [
         "C:\\Program Files (x86)\\UltraViewer\\UltraViewer_Desktop.exe",
         "*\\UltraViewer\\",

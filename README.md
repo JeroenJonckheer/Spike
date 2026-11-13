@@ -4,8 +4,8 @@
 
 # Spike
 
-**A watchdog for your computer.**
-Free, open source and private. One small program for Windows.
+**A loyal watchdog for your computer.**
+Free, private and always on guard. One small program for Windows.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -17,6 +17,12 @@ Free, open source and private. One small program for Windows.
 
 > **Spike is being built.** There is no download yet. This page describes what Spike will do.
 > The design is in [docs/ontwerp.md](docs/ontwerp.md) (Dutch).
+
+You can always count on a faithful dog. It knows your home, it knows your family and it
+barks the moment a stranger is at the door. Spike watches over your computer the same way.
+It lies quietly in the corner of the screen and you won't notice it. Until someone tries to get in.
+
+**Spike knows when you are in danger, before it is too late.**
 
 ## Why
 
