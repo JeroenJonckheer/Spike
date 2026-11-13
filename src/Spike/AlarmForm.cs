@@ -172,7 +172,7 @@ internal sealed class AlarmForm : Form
         _column.Controls.Add(Line(string.Format(t.OffBody, first.Name, first.Phone), 26f));
         var row = Row();
         var ok = BigButton(t.Understood, Color.White, Navy);
-        ok.Click += (_, _) => { if (_realClick()) Finish(null); };
+        ok.Click += (_, _) => { if (_realClick()) Dismiss(); };
         row.Controls.Add(ok);
         _column.Controls.Add(row);
         Centre();
@@ -182,10 +182,10 @@ internal sealed class AlarmForm : Form
 
     private void Finish(EventHandler? handler)
     {
+        bool distrust = handler == Distrusted && handler is not null;
         handler?.Invoke(this, EventArgs.Empty);
-        if (handler == Distrusted) return; // stays open until the Guard reports "offline"
-        _closingAllowed = true;
-        Close();
+        if (distrust) return; // stays open until the Guard reports "offline"
+        Dismiss();
     }
 
     /// <summary>Closes the screen from code (the program went away by itself).</summary>
